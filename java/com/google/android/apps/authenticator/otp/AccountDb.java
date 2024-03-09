@@ -536,7 +536,7 @@ public class AccountDb {
       return false;
     }
 
-    if (index.getName().equals(GOOGLE_CORP_ACCOUNT_NAME)) {
+    if (GOOGLE_CORP_ACCOUNT_NAME.equals(index.getName())) {
       return true;
     }
 
@@ -689,7 +689,7 @@ public class AccountDb {
    *   to be used in an {@link #add(String, String, OtpType, Integer, Boolean, String)} operation
    */
   public boolean addWillOverwriteExistingSeedFor(AccountIndex index) {
-    if ((index.getIssuer() == null) && !index.getName().equals(GOOGLE_CORP_ACCOUNT_NAME)) {
+    if ((index.getIssuer() == null) && !GOOGLE_CORP_ACCOUNT_NAME.equals(index.getName())) {
       return false;
     }
     return findSimilarExistingIndex(index) != null;
@@ -725,7 +725,7 @@ public class AccountDb {
     AccountIndex indexToAdd = new AccountIndex(name, issuer);
     Log.i(LOCAL_TAG, "Adding account: " + indexToAdd);
 
-    if ((issuer != null) || name.equals(GOOGLE_CORP_ACCOUNT_NAME)) {
+    if ((issuer != null) || GOOGLE_CORP_ACCOUNT_NAME.equals(name)) {
       // When an issuer is set, we will overwrite the matching account if it already exists
       // (ditto for "Google Internal 2Factor" accounts, even though they have a null issuer).
       if (issuer != null) {
